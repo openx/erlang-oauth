@@ -1,3 +1,7 @@
+v1.2.2.1 (2012-06-18)
+
+  * Limit character set used for nonce
+
 v1.2.2 (2011-11-18) 994f3d4
 
   * Add support for new tagged tuple returned by http_uri:parse/1 (R15B)

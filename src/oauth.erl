@@ -70,7 +70,9 @@ signature_params(Consumer, Params, Token) ->
 
 signature_params(Consumer, Params) ->
   Timestamp = unix_timestamp(),
-  Nonce = base64:encode_to_string(crypto:rand_bytes(32)), % cf. ruby-oauth
+  % limit Nonce to 0-9A-F, base64 characters like = can be troublesome
+  <<N:256>> = crypto:rand_bytes(32),
+  Nonce = lists:flatten(io_lib:format ("~.16B",[N])),
   [ {"oauth_version", "1.0"}
   , {"oauth_nonce", Nonce}
   , {"oauth_timestamp", integer_to_list(Timestamp)}
