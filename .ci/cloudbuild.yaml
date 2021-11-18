@@ -1,0 +1,15 @@
+steps:
+  - id: docker
+    name: docker
+    entrypoint: sh
+    args:
+      - -c
+      - |
+        set -ex
+        docker build \
+          --network=cloudbuild \
+          -f test.Dockerfile .
+
+substitutions:
+  _PROJECT_NAME: erlang-oauth
+timeout: 3600s
